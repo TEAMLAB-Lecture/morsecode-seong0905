@@ -92,6 +92,7 @@ def is_validated_english_sentence(user_input):
         return False
     else:
         return True
+        
     return result
     # ==================================
 
