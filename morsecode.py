@@ -124,7 +124,7 @@ def is_validated_morse_code(user_input):
     morse = get_morse_code_dict().values()
     input_list = user_input.split(" ")
     
-    return any(a in morse for a in input_list)
+    return all(a in morse for a in input_list)
     # ==================================
 
 
@@ -209,7 +209,7 @@ def encoding_character(english_character):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     morse_code_dict = get_morse_code_dict()
-    result = morse_code_dict[english_character]
+    result = morse_code_dict[english_character.upper()]
 
     return result
     # ==================================
