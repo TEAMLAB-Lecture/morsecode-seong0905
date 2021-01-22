@@ -155,6 +155,33 @@ def get_cleaned_english_sentence(raw_english_sentence):
 
     # ==================================
 
+def encoding_character(english_character):
+    """
+    Input:
+        - english_character : 문자열값으로 알파벳 한 글자의 입력이 보장됨
+    Output:
+        - get_morse_code_dict 함수의 반환 값으로 인해 변환된 모스부호 문자열값
+    Examples:
+        >>> import morsecode as mc
+        >>> mc.encoding_character("G")
+        '--.'
+        >>> mc.encoding_character("A")
+        '.-'
+        >>> mc.encoding_character("C")
+        '-.-.'
+        >>> mc.encoding_character("H")
+        '....'
+        >>> mc.encoding_character("O")
+        '---'
+        >>> mc.encoding_character("N")
+        '-.'
+    """
+    # ===Modify codes below=============
+    # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
+    morse_code_dict = get_morse_code_dict()
+    result = morse_code_dict[english_character.upper()]
+
+    return result
 
 def decoding_character(morse_character):
     """
@@ -186,35 +213,7 @@ def decoding_character(morse_character):
     # ==================================
 
 
-def encoding_sentence(english_sentence):
-    """
-    Input:
-        - english_sentence : 문자열 값으로 모스 부호로 변환이 가능한 영어문장
-    Output:
-        - 입력된 영어문장 문자열 값을 모스부호로 변환된 알파벳으로 변환한 문자열
-          단 양쪽 끝에 빈칸은 삭제한다.
-    Examples:
-        >>> import morsecode as mc
-        >>> mc.encoding_sentence("HI! Fine, Thank you.")
-        '.... ..  ..-. .. -. .  - .... .- -. -.-  -.-- --- ..-'
-        >>> mc.encoding_sentence("Hello! This is CS fifty Class.")
-        '.... . .-.. .-.. ---  - .... .. ...  .. ...  -.-. ...  ..-. .. ..-. - -.--  -.-. .-.. .- ... ...'
-        >>> mc.encoding_sentence("We Are Gachon")
-        '.-- .  .- .-. .  --. .- -.-. .... --- -.'
-        >>> mc.encoding_sentence("Hi! Hi!")
-        '.... ..  .... ..'
-    """
-    # ===Modify codes below=============
-    # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
-    cleaned = get_cleaned_english_sentence(english_sentence)
-    word_list = cleaned.split(" ")
-    result = []
-    for word in word_list:
-        if word:
-            encoded = [encoding_character(english_character) for english_character in word]
-            result.append(" ".join(encoded))
-    return "  ".join(result)
-    # ==================================
+
 
 
 def decoding_sentence(morse_sentence):
@@ -270,12 +269,13 @@ def encoding_sentence(english_sentence):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
-    cleaned = get_cleaned_english_sentence(english_sentence).replace("  "," ")
+    cleaned = get_cleaned_english_sentence(english_sentence)
     word_list = cleaned.split(" ")
     result = []
     for word in word_list:
-        encoded = [encoding_character(english_character) for english_character in word]
-        result.append(" ".join(encoded))
+        if word:
+            encoded = [encoding_character(english_character) for english_character in word]
+            result.append(" ".join(encoded))
     return "  ".join(result)
     # ==================================
 
